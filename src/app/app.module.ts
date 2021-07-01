@@ -1,10 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 import { RidersListComponent } from './components/riders-list/riders-list.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +14,6 @@ import { RidersListComponent } from './components/riders-list/riders-list.compon
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClient,
     FormsModule,
     ReactiveFormsModule
   ],
