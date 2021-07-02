@@ -1,1 +1,8 @@
-@import url("./assets/bootstrap.min.css")
+@import url("./assets/bootstrap.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap');
+
+
+body[dir='ltr'] {
+   font-family: 'Quicksand', cursive;
+   text-align: left;
+}
