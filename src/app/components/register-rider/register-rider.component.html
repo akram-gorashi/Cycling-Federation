@@ -1,5 +1,6 @@
 <div class="container">
-    <form *ngIf="registerNewRiderFormGroup" [formGroup]="registerNewRiderFormGroup">
+    <form enctype="multipart/form-data" *ngIf="registerNewRiderFormGroup" [formGroup]="registerNewRiderFormGroup"
+        #registerNewRiderForm>
         <!-- ----------------------------------------------------------------------- -->
         <!--                                Full Name                                -->
         <!-- ----------------------------------------------------------------------- -->
@@ -9,6 +10,20 @@
                 [ngClass]="{'is-valid': (formControls.name.valid && formControls.name.touched), 'is-invalid' :  (formControls.name.invalid && formControls.name.touched)}"
                 id="name" formControlName="name">
             <div *ngIf="formControls.name.errors && formControls.name.errors.required" class="invalid-feedback">Sorry,
+                this
+                field is required</div>
+
+        </div>
+
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                                phone                                    -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="form-group has-success">
+            <label class="form-label mt-4" for="phone">Phone Number</label>
+            <input type="text" value="correct value" class="form-control"
+                [ngClass]="{'is-valid': (formControls.phone.valid && formControls.phone.touched), 'is-invalid' :  (formControls.phone.invalid && formControls.phone.touched)}"
+                id="phone" formControlName="phone">
+            <div *ngIf="formControls.phone.errors && formControls.phone.errors.required" class="invalid-feedback">Sorry,
                 this
                 field is required</div>
 
@@ -39,26 +54,43 @@
             <div *ngIf="formControls.tshirt_color.errors && formControls.tshirt_color.errors.required"
                 class="invalid-feedback">Sorry, this
                 field is required</div>
-
-
         </div>
         <!-- ----------------------------------------------------------------------- -->
         <!--                                  Image                                  -->
         <!-- ----------------------------------------------------------------------- -->
-        <div class="form-group has-danger">
-            <label class="form-label mt-4" for="image">Image</label>
-            <input type="file" value="wrong value" class="form-control" id="image">
-            <div *ngIf="formControls.image.errors && formControls.image.errors.required" class="invalid-feedback">Sorry,
-                this
-                field is required</div>
+        <div class="form-group" *ngIf="!supportedFile">
+            <label style="color: red;">Sorry, this file is not supported</label>
+          </div>
 
+        <!-- upload Button -->
+        <div style="display: none;">
+            <div class="upload-btn-wrapper">
+                <button type="button" class="btn btn-primary"> <i class="icon ion-md-add-circle-outline"></i>
+                    Upload Files
+                </button>
+                <input name="image" type="file" accept="image/*" #file (change)="handleInputChange($event)" />
+            </div>
         </div>
+        <!-- drag and drop file area -->
+        <div class="form-group my-4">
+            <div class="dropzone-wrapper" (click)="file.click()">
+                <div class="dropzone-desc">
+                    <!-- <fa-icon icon="download" class="icon" size="2x"></fa-icon> -->
+                    <h6>Browse</h6>
+                </div>
+                <input type="file" name="image" class="dropzone" />
+            </div>
+        </div>
+
         <!-- ----------------------------------------------------------------------- -->
         <!--                              submit button                              -->
         <!-- ----------------------------------------------------------------------- -->
         <div class="row">
             <div class="col d-flex justify-content-start my-5">
-                <button type="button" class="btn btn-primary" (click)="submitRider()">Register Rider</button>
+                <button type="button" class="btn btn-primary" (click)="submitRider()">Register Rider
+                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </form>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { RegisterRider } from '../models/RegisterRider';
 import { Rider } from '../models/Riders';
 
 @Injectable({
@@ -14,8 +15,8 @@ export class RidersService {
    * Returns an array of riders
    * @param Riders
    */
-  getRidersLis(){
-   return this.http.get<Rider[]>(this.apiUrl + 'riders_list');
+  getRidersLis() {
+    return this.http.get<Rider[]>(this.apiUrl + 'riders_list');
   }
 
   /**
@@ -23,5 +24,8 @@ export class RidersService {
    * @param Riders
    */
 
-  InsertNewRiders() {}
+  registerNewRider(newRider: any) {
+     console.log(newRider);
+    return this.http.post(environment.apiUrl + 'register_new_team', newRider);
+  }
 }
