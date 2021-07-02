@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register-rider.component.scss'],
 })
 export class RegisterRiderComponent implements OnInit {
-  registerNewRiderFormGroup: FormGroup | undefined;
+  registerNewRiderFormGroup: FormGroup = this.fb.group({});
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -23,7 +23,21 @@ export class RegisterRiderComponent implements OnInit {
     });
   }
 
-  get formControl() {
-    return this.registerNewRiderFormGroup?.controls;
+  get formControls() {
+    return this.registerNewRiderFormGroup.controls;
+  }
+
+  submitRider() {
+    if (this.registerNewRiderFormGroup.invalid) {
+      this.registerNewRiderFormGroup.markAllAsTouched();
+      const firstElementWithError = document.querySelector(
+        '.ng-invalid[formControlName]'
+      );
+      window.scroll({
+        top: firstElementWithError?.scrollTop,
+        behavior: 'smooth',
+      });
+      return;
+    }
   }
 }

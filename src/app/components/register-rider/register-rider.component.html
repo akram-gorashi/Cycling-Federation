@@ -1,27 +1,65 @@
 <div class="container">
-   <form *ngIf="registerNewRiderFormGroup" [formGroup]="registerNewRiderFormGroup">
-      <div class="form-group has-success">
-         <label class="form-label mt-4" for="name">Full Name</label>
-         <input type="text" value="correct value" class="form-control is-valid" id="name" formControlName="name">
-         <div class="valid-feedback">Success! You've done it.</div>
-      </div>
+    <form *ngIf="registerNewRiderFormGroup" [formGroup]="registerNewRiderFormGroup">
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                                Full Name                                -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="form-group has-success">
+            <label class="form-label mt-4" for="name">Full Name</label>
+            <input type="text" value="correct value" class="form-control"
+                [ngClass]="{'is-valid': (formControls.name.valid && formControls.name.touched), 'is-invalid' :  (formControls.name.invalid && formControls.name.touched)}"
+                id="name" formControlName="name">
+            <div *ngIf="formControls.name.errors && formControls.name.errors.required" class="invalid-feedback">Sorry,
+                this
+                field is required</div>
 
-      <div class="form-group has-danger">
-         <label class="form-label mt-4" for="email">Email</label>
-         <input type="email" value="wrong value" class="form-control is-invalid" id="email" formControlName="email">
-         <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
-      </div>
+        </div>
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                                  Email                                  -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="form-group has-danger">
+            <label class="form-label mt-4" for="email">Email</label>
+            <input type="email" value="wrong value" class="form-control"
+                [ngClass]="{'is-valid': (formControls.email.valid && formControls.email.touched), 'is-invalid' :  (formControls.email.invalid && formControls.email.touched)}"
+                id="email" formControlName="email">
+            <div *ngIf="formControls.email.errors && formControls.email.errors.required" class="invalid-feedback">Sorry,
+                this
+                field is required</div>
 
-      <div class="form-group has-success">
-         <label class="form-label mt-4" for="color">T-Shirt Color</label>
-         <input type="color" value="correct value" class="form-control is-valid" id="color" formControlName="tshirt_color">
-         <div class="valid-feedback">Success! You've done it.</div>
-      </div>
+            <div *ngIf="formControls.email.errors && formControls.email.errors.email" class="invalid-feedback">Sorry,
+                Please enter a valid email address.</div>
+        </div>
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                              T-Shirt Color                              -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="form-group has-success">
+            <label class="form-label mt-4" for="color">T-Shirt Color</label>
+            <input type="color" value="correct value" class="form-control"
+                [ngClass]="{'is-valid': (formControls.tshirt_color.valid && formControls.tshirt_color.touched), 'is-invalid' :  (formControls.tshirt_color.invalid && formControls.tshirt_color.touched)}"
+                id="color" formControlName="tshirt_color">
+            <div *ngIf="formControls.tshirt_color.errors && formControls.tshirt_color.errors.required"
+                class="invalid-feedback">Sorry, this
+                field is required</div>
 
-      <div class="form-group has-danger">
-         <label class="form-label mt-4" for="image">Image</label>
-         <input type="file" value="wrong value" class="form-control is-invalid" id="image">
-         <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
-      </div>
-   </form>
+
+        </div>
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                                  Image                                  -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="form-group has-danger">
+            <label class="form-label mt-4" for="image">Image</label>
+            <input type="file" value="wrong value" class="form-control" id="image">
+            <div *ngIf="formControls.image.errors && formControls.image.errors.required" class="invalid-feedback">Sorry,
+                this
+                field is required</div>
+
+        </div>
+        <!-- ----------------------------------------------------------------------- -->
+        <!--                              submit button                              -->
+        <!-- ----------------------------------------------------------------------- -->
+        <div class="row">
+            <div class="col d-flex justify-content-start my-5">
+                <button type="button" class="btn btn-primary" (click)="submitRider()">Register Rider</button>
+            </div>
+        </div>
+    </form>
 </div>
